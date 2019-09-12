@@ -147,5 +147,12 @@ public class ProducerTest {
         }
     }
 
+    @Test
+    public void testBatchWithPartition() {
+        for (int i = 0; i < 12; i++) {
+            kafkaTemplate.send("topic.quick.batch.partition", "test batch partition listener, dataNum-" + i);
+        }
+    }
+
 
 }

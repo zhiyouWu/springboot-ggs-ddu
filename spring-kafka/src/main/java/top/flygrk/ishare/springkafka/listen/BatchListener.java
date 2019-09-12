@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.PartitionOffset;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.stereotype.Component;
@@ -67,5 +69,34 @@ public class BatchListener {
             logger.info(s);
         }
     }
+
+
+    @Bean
+    public NewTopic batchWithPartitionTopic() {
+        return new NewTopic("topic.quick.batch.partition", 8, (short)1);
+    }
+
+    // 监听Topic中指定的分区
+    // 使用@KafkaListener注解的topicPartitions属性监听不同的partition分区。
+    // @TopicPartition：topic--需要监听的Topic的名称，partitions --需要监听Topic的分区id，
+    // partitionOffsets --可以设置从某个偏移量开始监听
+    // @PartitionOffset：partition --分区Id，非数组，initialOffset --初始偏移量
+    @KafkaListener(id = "batchWithPartition", clientIdPrefix = "bwp", containerFactory = "batchContainerFactory",
+            topicPartitions = {
+                @TopicPartition(topic = "topic.quick.batch.partition", partitions = {"1", "3"}),
+                @TopicPartition(topic = "topic.quick.batch.partition", partitions = {"0", "4"},
+                        partitionOffsets = @PartitionOffset(partition = "2", initialOffset = "100"))
+            }
+    )
+    public void batchListenWithPartition(List<String> data) {
+        logger.info("topic.quick.batch.partition  receive : ");
+        for (String s : data) {
+            logger.info(s);
+        }
+    }
+
+
+
+
 
 }
