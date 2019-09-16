@@ -154,5 +154,11 @@ public class ProducerTest {
         }
     }
 
+    @Test
+    public void testAck() throws InterruptedException {
+        for (int i = 0; i < 5; i++) {
+            kafkaTemplate.send("topic.quick.ack", i + "");
+        }
+    }
 
 }
