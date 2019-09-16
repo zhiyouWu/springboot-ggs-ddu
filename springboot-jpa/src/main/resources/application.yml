@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ggs_ddu?characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: zhiyou
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
