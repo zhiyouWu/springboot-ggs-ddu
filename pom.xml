@@ -25,7 +25,8 @@
 		<module>springboot-mongodb</module>
 		<module>springboot-swagger</module>
 		<module>springboot-jpa</module>
-	</modules>
+        <module>springboot-dubbo</module>
+    </modules>
 
 	<build>
 		<plugins>
