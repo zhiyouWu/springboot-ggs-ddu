@@ -26,7 +26,8 @@
 		<module>springboot-swagger</module>
 		<module>springboot-jpa</module>
         <module>springboot-dubbo</module>
-    </modules>
+		<module>dubbo-spi</module>
+	</modules>
 
 	<build>
 		<plugins>
